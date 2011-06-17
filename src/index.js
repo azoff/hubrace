@@ -2,23 +2,24 @@
 	
 	var user, repository, branch, hubrace;
 	
-	function applyOptions(parent) {
-		return function(values){
-			parent.empty().append(
+	function addOptions(parent, textProperty, valueProperty) {
+		valueProperty = valueProperty || textProperty;
+		return function(elements){
+			parent.append(
 				$.tmpl(
-					'{{each values}}<option>${$value}</option>{{/each}}', 
-					{ values: values }
+					'{{each(i,element) elements}}<option value="${element.' + valueProperty + '}">${element.' + textProperty + '}</option>{{/each}}', 
+					{ elements: elements }
 				)
 			);
 		}
 	}
 	
 	function updateRepositories() {
-		GitHub.getRepositoryList(user.val(), applyOptions(repository));
+		GitHub.getRepositoryList(user.val(), addOptions(repository.empty(), 'name'));
 	}
 	
 	function updateBranches() {
-		GitHub.getBranchList(user.val(), repository.val(), applyOptions(branch));
+		GitHub.getBranchList(user.val(), repository.val(), addOptions(branch.empty(), 'name'));
 	}
 	
 	function updateRace() {
