@@ -1,10 +1,39 @@
-Modernizr.load([{
-	test: window.jQuery,
-	nope: 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
-},{
-	test: window.jQuery && window.jQuery.tmpl,
-	nope: 'http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'
-}, '/src/github.js', {
-	load: 'src/hubrace.js',
-	callback: function(){ hubrace('#hubrace'); }
-}]);
+(function($){ 
+	
+	var user, repository, branch, hubrace;
+	
+	function applyOptions(parent) {
+		return function(values){
+			parent.empty().append(
+				$.tmpl(
+					'{{each values}}<option>${$value}</option>{{/each}}', 
+					{ values: values }
+				)
+			);
+		}
+	}
+	
+	function updateRepositories() {
+		GitHub.getRepositoryList(user.val(), applyOptions(repository));
+	}
+	
+	function updateBranches() {
+		GitHub.getBranchList(user.val(), repository.val(), applyOptions(branch));
+	}
+	
+	function updateRace() {
+		var remote = new GitHub.Remote(user.val(), repository.val(), branch.val());
+		hubrace.race(remote);
+	}
+	
+	function main() {  
+		user = $('#user').change(updateRepositories);
+		repository = $('#repository').change(updateBranches);
+		branch = $('#branch').change(updateRace);
+		hubrace = new HubRace("#hubrace");
+	}
+	
+	$(main);
+	
+})(jQuery);
+

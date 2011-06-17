@@ -12,14 +12,38 @@
 	
 	<link rel="shortcut icon" href="/static/img/favicon.ico">
 	<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
-	<link rel="stylesheet" href="/static/css/index.css?v=1">
+	<link rel="stylesheet" href="/static/css/hubrace.css?v=1">
 </head>
 <body>
-	<div id="container">
-		<header>HubRace! - A GitHub Repository Race!</header>
-		<section id="hubrace" role="main"></section>		
-	</div>
+	<form>
+		<fieldset>
+			<label for="user">GitHub Username</label>
+			<input type="text" id="user" value="" />
+		</fieldset>
+		<fieldset>
+			<label for="repository">GitHub Repository</label>
+			<select id="repository"></select>
+		</fieldset>
+		<fieldset>
+			<label for="branch">Repository Branch</label>
+			<select id="branch"></select>
+		</fieldset>
+	</form>
+	<section id="hubrace"></section>
 	<script src="/src/modernizr.custom.min.js"></script>
-	<script src="/src/index.js"></script>
+	<script>
+	Modernizr.load([{
+		test: window.jQuery,
+		nope: 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
+	},{
+		test: window.jQuery && window.jQuery.tmpl,
+		nope: 'http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'
+	}, 
+		'/src/classes/github.js', 
+		'/src/classes/github.remote.js', 
+		'/src/classes/hubrace.js', 
+		'/src/index.js' 
+	]);
+	</script>
 </body>
 </html>
