@@ -10,9 +10,9 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link rel="shortcut icon" href="/static/img/favicon.ico">
-	<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
-	<link rel="stylesheet" href="/static/css/hubrace.css?v=1">
+	<link rel="shortcut icon" href="static/img/favicon.ico">
+	<link rel="apple-touch-icon" href="static/img/apple-touch-icon.png">
+	<link rel="stylesheet" href="static/css/hubrace.css?v=1">
 </head>
 <body>
 	<form>
@@ -30,7 +30,7 @@
 		</fieldset>
 	</form>
 	<section id="hubrace"></section>
-	<script src="/src/modernizr.custom.min.js"></script>
+	<script src="src/externs/modernizr.custom.min.js"></script>
 	<script>
 	Modernizr.load([{
 		test: window.jQuery,
@@ -39,10 +39,10 @@
 		test: window.jQuery && window.jQuery.tmpl,
 		nope: 'http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'
 	}, 
-		'/src/classes/github.js', 
-		'/src/classes/github.remote.js', 
-		'/src/classes/hubrace.js', 
-		'/src/index.js' 
+		'src/classes/github.js', 
+		'src/classes/github.remote.js', 
+		'src/classes/hubrace.js', 
+		'src/index.js' 
 	]);
 	</script>
 </body>
